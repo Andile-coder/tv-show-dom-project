@@ -8,13 +8,96 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
 
+  <header>
+    <section id="input">
+      <div>
+        <button id="homeBtn" class="Btn">Home</button>
+      </div>
+      <div id="seriesSelection">
+        <select id="showSelection" class="dropdown"></select>
+      </div>
+      <div id="selection">
+        <!-- <label>Choose and episode</label> -->
+        <select id="epiSelection" class="dropdown"></select>
+      </div>
+      <div id="input_Search">
+        <input id="filterSearch" class="input" />
+      </div>
+      <div id="length">
+        <p><!--Lenght --></p>
+      </div>
+    </section>
+  </header>
   <body>
-    <div id="root"></div>
+    <div id="main">
+      <section id="front-page">
+        <section id="series">
+          <div id="showListing"></div>
+          <section id="Game_Of_Thrones">
+            <!-- pop up for episodes -->
+            <div id="episodePopup" class="popper">
+              <div id="header"><h3></h3></div>
+              <div class="close-btn">&times;</div>
+              <div id="popup-body">
+                <div class="picture">
+                  <img />
+                </div>
+                <div class="summary">
+                  <p>
+                    iet res quibusdam ea nostrum sit expedita obcaecati iusto
+                    veritatis ullam explicabo!
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- popup for shows -->
+            <div id="showPop" class="popper">
+              <div id="close" class="close-btn">&times;</div>
+              <div id="showPop-img">
+                <img />
+              </div>
+              <div id="showPop-sum"><p></p></div>
+              <div id="showPop-rating">
+                <p></p>
+                <p></p>
+                <p></p>
+              </div>
+            </div>
 
-    <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
+            <section id="season1">
+              <!-- <article class="seasonEpisode">
+                <div id="s1Ep1" class="episode">
+                  <header>
+                    <h3>Name of Episode</h3>
+                  </header>
+                  <figure class="image">
+                    <img
+                      class="img"
+                      src="http://static.tvmaze.com/uploads/images/medium_landscape/1/2668.jpg"
+                    />
+                  </figure>
+                  <figcaption>
+                    <span>
+                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Repudiandae nobis quasi ipsam aspernatur soluta officiis
+                      voluptatum qui unde magni animi sapiente recusandae eaque
+                      quam optio corrupti, iste, alias laudantium neque!</span
+                    >
+                  </figcaption>
+                </div>
+              </article> -->
+            </section>
+            <section id="season2">
+              <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum magnam doloremque culpa rem. Ratione eaque temporibus sed deleniti, natus ipsam maxime accusantium omnis laborum repellendus perferendis similique, mollitia debitis amet.</p> -->
+            </section>
+            <section id="season3"></section>
+          </section>
+        </section>
+      </section>
+    </div>
+
+    <script src="shows.js"></script>
     <script src="episodes.js"></script>
-
-    <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
   </body>
 </html>

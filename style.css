@@ -1,3 +1,60 @@
-#root {
-  color: red;
+.show {
+  background-color: brown;
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 5px;
+}
+#main {
+  margin-left: 6rem;
+}
+/* the button */
+input {
+  height: 3em;
+  margin-left: 1rem;
+}
+/* Div that has button and length */
+#input {
+  display: flex;
+}
+#season1 {
+  display: flex;
+  flex-flow: row wrap;
+}
+article {
+  margin: 1rem;
+}
+figure {
+  display: flex;
+  flex-flow: column wrap;
+  background-color: pink;
+  margin: 0;
+}
+figure img {
+  margin-right: 0.5rem;
+}
+.episode {
+  border: 1px solid yellow;
+  width: 16rem;
+  height: 30rem;
+}
+span p {
+  text-align: justify;
+  margin: 0.5rem;
+}
+#episodePopup,
+#showPop {
+  position: absolute;
+  display: none;
+  top: 0;
+  width: 400px;
+  transform: translate(50%, 50%);
+  background-color: blue;
+}
+#popup-body img {
+  width: 100%;
+  height: 100%;
+}
+#popup-body {
+  width: 400px;
+  display: flex;
 }
