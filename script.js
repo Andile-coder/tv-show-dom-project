@@ -29,7 +29,8 @@ inputElem.addEventListener("change", () => {
 });
 // popup modal
 let valueOfDrp = document.getElementById("epiSelection");
-valueOfDrp.addEventListener("change", function () {
+
+valueOfDrp.addEventListener("change", function (event) {
   let array;
   allEpisodes.forEach((element) => {
     if (element.name === valueOfDrp.value) {
@@ -55,57 +56,53 @@ function addSelection(array) {
 }
 let showValue = document.getElementById("showSelection");
 
-showValue.addEventListener("change", function () {
+showValue.addEventListener("change", function (event) {
   if (document.getElementById("showListing").style.display != "none") {
-    document.getElementById("showPop").style.display = "block";
-    //create modal on home page for shows
-    showValue.addEventListener("change", function () {
-      let array;
-      allShows.forEach((element) => {
-        if (element.id == showValue.value) {
-          array = element;
-        }
-      });
-      document.querySelector("#showPop-img img").src = array.image.medium;
-      document.querySelector("#showPop-sum p").innerHTML = array.summary;
-      document.querySelector(
-        "#showPop-rating p:first-child"
-      ).innerHTML = `<b>Ratings</b>: ${array.rating}`;
-      document.querySelector(
-        "#showPop-rating p:nth-child(2)"
-      ).innerHTML = `<b>Genres</b>: ${array.genres}`;
-      document.querySelector(
-        "#showPop-rating p:nth-child(3)"
-      ).innerHTML = `<b>Runtime</b>: ${array.runtime}`;
-    });
-    document.querySelector("#close").addEventListener("click", function () {
-      document.querySelector("#showPop").style.display = "none";
-    });
+    let selectedShow = allShows.find(
+      (element) => element.id == event.target.value
+    );
+    showPopUp(selectedShow);
   } else {
     // show episodes of show when not on homepAGE
-    allShows.forEach((elem) => {
-      if (elem.id == showValue.value) {
-        fetch(`https://api.tvmaze.com/shows/${elem.id}/episodes`)
-          .then((response) => {
-            if (response.status >= 200 && response.status <= 299) {
-              return response.json();
-            } else {
-              throw new Error(
-                `encountered something unexpected: ${response.status} ${response.statusText}`
-              );
-            }
-          })
-          .then((response) => {
-            clear();
-            erase();
-            allEpisodes = response;
-            loopList(response);
-          })
-          .catch((error) => console.log(error));
-      }
-    });
+    fetch(`https://api.tvmaze.com/shows/${event.target.value}/episodes`)
+      .then((response) => {
+        if (response.status >= 200 && response.status <= 299) {
+          return response.json();
+        } else {
+          throw new Error(
+            `encountered something unexpected: ${response.status} ${response.statusText}`
+          );
+        }
+      })
+      .then((response) => {
+        clear();
+        erase();
+        allEpisodes = response;
+        loopList(response);
+      })
+      .catch((error) => console.log(error));
   }
 });
+
+function showPopUp(array) {
+  //create modal on home page for shows
+  console.log("inside second showvalue");
+  document.querySelector("#showPop-img img").src = array.image.medium;
+  document.querySelector("#showPop-sum p").innerHTML = array.summary;
+  document.querySelector(
+    "#showPop-rating p:first-child"
+  ).innerHTML = `<b>Ratings</b>: ${array.rating}`;
+  document.querySelector(
+    "#showPop-rating p:nth-child(2)"
+  ).innerHTML = `<b>Genres</b>: ${array.genres}`;
+  document.querySelector(
+    "#showPop-rating p:nth-child(3)"
+  ).innerHTML = `<b>Runtime</b>: ${array.runtime}`;
+  document.querySelector("#close").addEventListener("click", function () {
+    document.querySelector("#showPop").style.display = "none";
+  });
+  document.getElementById("showPop").style.display = "block";
+}
 
 function addSeriesSelection(array) {
   for (let i = 0; i < array.length; i++) {
@@ -117,7 +114,7 @@ function addSeriesSelection(array) {
 }
 function length(array) {
   let plength = document.querySelector("#length p");
-  plength.innerHTML = `Display ${array.length}/i am a bug`;
+  plength.innerHTML = `Display ${array.length}/${allEpisodes.length}`;
 }
 function erase() {
   while (selectOption.firstChild) {
@@ -143,6 +140,9 @@ function fetchEpisodes(id) {
     })
     .then((response) => {
       loopList(response);
+
+      allEpisodes = response;
+      length(allEpisodes);
     })
     .catch((error) => console.log(error));
 }
@@ -217,7 +217,7 @@ function displayAllShows() {
       document.getElementById("showListing").appendChild(divMain);
       divMain.addEventListener("click", () => {
         document.getElementById("showListing").style.display = "none";
-        fetchEpisodes(allShows[i].id);
+        fetchEpisodes(divMain.id);
       });
     }
   }

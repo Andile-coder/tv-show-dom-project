@@ -47,8 +47,10 @@ span p {
   display: none;
   top: 0;
   width: 400px;
+  height: 400px;
   transform: translate(50%, 50%);
-  background-color: blue;
+  background-color: rgb(218, 218, 235);
+  border-radius: 10%;
 }
 #popup-body img {
   width: 100%;
